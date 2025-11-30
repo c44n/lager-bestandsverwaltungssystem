@@ -40,17 +40,31 @@
                                 <div class="pt-0">
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
+
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+
                                         <div class="form-group mb-3">
                                             <label for="emailaddress" class="form-label">Email</label>
                                             <input class="form-control" type="email" name="email" required=""
                                                 placeholder="Enter your email">
+                                            @error('email')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label for="password" class="form-label">Passwort</label>
                                             <input class="form-control" type="password" required="" name="password"
                                                 placeholder="Enter your password">
+                                            @error('password')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
+
 
                                         <div class="col-sm-6 text-end">
                                             <a class='text-muted fs-14' href='{{ route('password.request') }}'>Passwort
@@ -65,15 +79,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        </form>
+                                    </form>
 
-                                        <div class="saprator my-4"><span>or sign in with</span></div>
+                                    <div class="saprator my-4"><span>or sign in with</span></div>
 
-                                        <div class="text-center text-muted mb-4">
-                                            <p class="mb-0">Don't have an account ?<a
-                                                    class='text-primary ms-2 fw-medium'
-                                                    href='{{ route('register') }}'>Sing up</a></p>
-                                        </div>
+                                    <div class="text-center text-muted mb-4">
+                                        <p class="mb-0">Don't have an account ?<a class='text-primary ms-2 fw-medium'
+                                                href='{{ route('register') }}'>Sing up</a></p>
+                                    </div>
 
 
                                 </div>
