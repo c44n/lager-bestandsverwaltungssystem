@@ -25,7 +25,7 @@
 
                             <div class="align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ (!empty($profileData->image)) ?  asset('upload/user_images/'.$profileData->image) : asset('upload/no_image.jpg') }}"
+                                    <img src="{{ !empty($profileData->image) ? asset('upload/user_images/' . $profileData->image) : asset('upload/no_image.jpg') }}"
                                         class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
 
                                     <div class="overflow-hidden ms-4">
@@ -39,10 +39,10 @@
                                 <div class="pt-4" id="profile_setting">
                                     <div class="row">
 
-                                        <div class="row">
-                                            <div class="col-lg-6 col-xl-6">
-                                                <div class="card border mb-0">
-
+                                        <div class="col-lg-6 col-xl-6">
+                                            <div class="card border mb-0">
+                                                <form action="" method="post">
+                                                    @csrf
                                                     <div class="card-header">
                                                         <div class="row align-items-center">
                                                             <div class="col">
@@ -53,119 +53,110 @@
 
                                                     <div class="card-body">
                                                         <div class="form-group mb-3 row">
-                                                            <label class="form-label">First Name</label>
+                                                            <label class="form-label">Name</label>
                                                             <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="text" value="Charles">
+                                                                <input class="form-control" type="text" name="name"
+                                                                    value="{{ $profileData->name }}">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group mb-3 row">
-                                                            <label class="form-label">Last Name</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="text" value="Buncle">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="form-label">Contact Phone</label>
+                                                            <label class="form-label">Telefon</label>
                                                             <div class="col-lg-12 col-xl-12">
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i
                                                                             class="mdi mdi-phone-outline"></i></span>
                                                                     <input class="form-control" type="text"
-                                                                        placeholder="Phone" aria-describedby="basic-addon1"
-                                                                        value="+61 399615">
+                                                                        aria-describedby="basic-addon1" name="phone"
+                                                                        value="{{ $profileData->phone }}">
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group mb-3 row">
-                                                            <label class="form-label">Email Address</label>
+                                                            <label class="form-label">Email</label>
                                                             <div class="col-lg-12 col-xl-12">
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i
                                                                             class="mdi mdi-email"></i></span>
                                                                     <input type="text" class="form-control"
-                                                                        value="CharlesBuncle@dayrep.com" placeholder="Email"
-                                                                        aria-describedby="basic-addon1">
+                                                                        name="email" placeholder="Email"
+                                                                        aria-describedby="basic-addon1"
+                                                                        value="{{ $profileData->email }}">
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group mb-3 row">
-                                                            <label class="form-label">Company</label>
+                                                            <label class="form-label">Adresse</label>
                                                             <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="text"
-                                                                    value="zoyothemes">
+                                                                <textarea name="address" class="form-control" rows="2">{{ $profileData->address }}</textarea>
                                                             </div>
+                                                        </div>
+
+                                                        <div class="form-group mb-3">
+                                                            <label for="formFile" class="form-label">Profilbild</label>
+                                                            <input class="form-control" type="file" id="image" name="photo">
                                                         </div>
 
                                                         <div class="form-group mb-3 row">
-                                                            <label class="form-label">City</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="text" value="Adelaide">
+                                                            <div class="col-12">
+                                                                <img id="showImage" src="{{ !empty($profileData->image) ? asset('upload/user_images/' . $profileData->image) : asset('upload/no_image.jpg') }}"
+                                                                    class="rounded-circle avatar-xxl img-thumbnail float-start"
+                                                                    alt="image profile">
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="form-label">Address</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="text"
-                                                                    value="Australia">
-                                                            </div>
-                                                        </div>
-
+                                                        <button type="submit" class="btn btn-primary">Speichern</button>
                                                     </div><!--end card-body-->
-                                                </div>
+                                                </form>
                                             </div>
+                                        </div>
 
-                                            <div class="col-lg-6 col-xl-6">
-                                                <div class="card border mb-0">
+                                        <div class="col-lg-6 col-xl-6">
+                                            <div class="card border mb-0">
 
-                                                    <div class="card-header">
-                                                        <div class="row align-items-center">
-                                                            <div class="col">
-                                                                <h4 class="card-title mb-0">Change Password</h4>
-                                                            </div><!--end col-->
+                                                <div class="card-header">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">
+                                                            <h4 class="card-title mb-0">Change Password</h4>
+                                                        </div><!--end col-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body mb-0">
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Old Password</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="password"
+                                                                placeholder="Old Password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">New Password</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="password"
+                                                                placeholder="New Password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Confirm Password</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="password"
+                                                                placeholder="Confirm Password">
                                                         </div>
                                                     </div>
 
-                                                    <div class="card-body mb-0">
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="form-label">Old Password</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="password"
-                                                                    placeholder="Old Password">
-                                                            </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <button type="submit" class="btn btn-primary">Change
+                                                                Password</button>
+                                                            <button type="button" class="btn btn-danger">Cancel</button>
                                                         </div>
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="form-label">New Password</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="password"
-                                                                    placeholder="New Password">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group mb-3 row">
-                                                            <label class="form-label">Confirm Password</label>
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <input class="form-control" type="password"
-                                                                    placeholder="Confirm Password">
-                                                            </div>
-                                                        </div>
+                                                    </div>
 
-                                                        <div class="form-group row">
-                                                            <div class="col-lg-12 col-xl-12">
-                                                                <button type="submit" class="btn btn-primary">Change
-                                                                    Password</button>
-                                                                <button type="button"
-                                                                    class="btn btn-danger">Cancel</button>
-                                                            </div>
-                                                        </div>
-
-                                                    </div><!--end card-body-->
-                                                </div>
+                                                </div><!--end card-body-->
                                             </div>
-
                                         </div>
                                     </div>
                                 </div> <!-- end education -->
@@ -179,4 +170,16 @@
         </div>
         <!-- container-fluid -->
     </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#image').change(function(e){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#showImage').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            })
+        })
+    </script>
 @endsection
