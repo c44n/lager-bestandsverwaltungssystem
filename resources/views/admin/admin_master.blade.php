@@ -33,11 +33,11 @@
 
 
         <!-- Topbar Start -->
-        @include('admin.body.header');
+        @include('admin.body.header')
         <!-- end Topbar -->
 
         <!-- Left Sidebar Start -->
-        @include('admin.body.sidebar');
+        @include('admin.body.sidebar')
         <!-- Left Sidebar End -->
 
         <!-- ============================================================== -->
@@ -45,11 +45,11 @@
         <!-- ============================================================== -->
 
         <div class="content-page">
-            @yield('admin');
+            @yield('admin')
             <!-- content -->
 
             <!-- Footer Start -->
-            @include('admin.body.footer');
+            @include('admin.body.footer')
             <!-- end Footer -->
 
         </div>
