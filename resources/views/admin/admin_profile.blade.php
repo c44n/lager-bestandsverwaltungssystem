@@ -25,7 +25,7 @@
 
                             <div class="align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ !empty($profileData->image) ? asset('upload/user_images/' . $profileData->image) : asset('upload/no_image.jpg') }}"
+                                    <img src="{{ !empty($profileData->photo) ? asset('upload/user_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
                                         class="rounded-circle avatar-xxl img-thumbnail float-start" alt="image profile">
 
                                     <div class="overflow-hidden ms-4">
@@ -41,7 +41,7 @@
 
                                         <div class="col-lg-6 col-xl-6">
                                             <div class="card border mb-0">
-                                                <form action="" method="post">
+                                                <form action="{{route('admin.profile.store')}}" method="post" enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="card-header">
                                                         <div class="row align-items-center">
@@ -101,7 +101,7 @@
 
                                                         <div class="form-group mb-3 row">
                                                             <div class="col-12">
-                                                                <img id="showImage" src="{{ !empty($profileData->image) ? asset('upload/user_images/' . $profileData->image) : asset('upload/no_image.jpg') }}"
+                                                                <img id="showImage" src="{{ !empty($profileData->photo) ? asset('upload/user_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
                                                                     class="rounded-circle avatar-xxl img-thumbnail float-start"
                                                                     alt="image profile">
                                                             </div>
