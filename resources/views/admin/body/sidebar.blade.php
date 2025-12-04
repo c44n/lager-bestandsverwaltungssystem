@@ -34,6 +34,24 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="#brands1" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Marken</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="brands">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.brand') }}" class="tp-link">Übersicht</a>
+                            </li>
+                            <li>
+                                <a href="auth-register.html" class="tp-link">Register</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title">Pages</li>
 
                 <li>

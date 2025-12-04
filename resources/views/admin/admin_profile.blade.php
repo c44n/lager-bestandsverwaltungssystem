@@ -41,7 +41,8 @@
 
                                         <div class="col-lg-6 col-xl-6">
                                             <div class="card border mb-0">
-                                                <form action="{{route('admin.profile.store')}}" method="post" enctype="multipart/form-data">
+                                                <form action="{{ route('admin.profile.store') }}" method="post"
+                                                    enctype="multipart/form-data">
                                                     @csrf
                                                     <div class="card-header">
                                                         <div class="row align-items-center">
@@ -96,12 +97,14 @@
 
                                                         <div class="form-group mb-3">
                                                             <label for="formFile" class="form-label">Profilbild</label>
-                                                            <input class="form-control" type="file" id="image" name="photo">
+                                                            <input class="form-control" type="file" id="image"
+                                                                name="photo">
                                                         </div>
 
                                                         <div class="form-group mb-3 row">
                                                             <div class="col-12">
-                                                                <img id="showImage" src="{{ !empty($profileData->photo) ? asset('upload/user_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
+                                                                <img id="showImage"
+                                                                    src="{{ !empty($profileData->photo) ? asset('upload/user_images/' . $profileData->photo) : asset('upload/no_image.jpg') }}"
                                                                     class="rounded-circle avatar-xxl img-thumbnail float-start"
                                                                     alt="image profile">
                                                             </div>
@@ -119,64 +122,77 @@
                                                 <div class="card-header">
                                                     <div class="row align-items-center">
                                                         <div class="col">
-                                                            <h4 class="card-title mb-0">Change Password</h4>
+                                                            <h4 class="card-title mb-0">Passwort ändern</h4>
                                                         </div><!--end col-->
                                                     </div>
                                                 </div>
+                                                <form action="{{ route('admin.password.update') }}" method="post">
+                                                    @csrf
+                                                    <div class="card-body mb-0">
+                                                        <div class="form-group mb-3 row">
+                                                            <label class="form-label">Altes Passwort</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                                <input
+                                                                    class="form-control @error('old_password') is-invalid @enderror"
+                                                                    id="old_password" type="password"
+                                                                    name="old_password">
+                                                                @error('old_password')
+                                                                    <span class="text text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
 
-                                                <div class="card-body mb-0">
-                                                    <div class="form-group mb-3 row">
-                                                        <label class="form-label">Old Password</label>
-                                                        <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                                placeholder="Old Password">
+                                                        <div class="form-group mb-3 row">
+                                                            <label class="form-label">Neues Passwort</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                                <input
+                                                                    class="form-control @error('new_password') is-invalid @enderror"
+                                                                    id="new_password" type="password"
+                                                                    name="new_password">
+                                                                @error('new_password')
+                                                                    <span class="text text-danger">{{ $message }}</span>
+                                                                @enderror
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label class="form-label">New Password</label>
-                                                        <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                                placeholder="New Password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group mb-3 row">
-                                                        <label class="form-label">Confirm Password</label>
-                                                        <div class="col-lg-12 col-xl-12">
-                                                            <input class="form-control" type="password"
-                                                                placeholder="Confirm Password">
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <div class="col-lg-12 col-xl-12">
-                                                            <button type="submit" class="btn btn-primary">Change
-                                                                Password</button>
-                                                            <button type="button" class="btn btn-danger">Cancel</button>
+                                                        <div class="form-group mb-3 row">
+                                                            <label class="form-label">Neues Passwort bestätigen</label>
+                                                            <div class="col-lg-12 col-xl-12">
+                                                                <input class="form-control" type="password"
+                                                                    id="new_password_confirmation" name="new_password_confirmation">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-12 col-xl-12">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Speichern</button>
+                                                            </div>
                                                         </div>
                                                     </div>
-
-                                                </div><!--end card-body-->
-                                            </div>
+                                                </form>
+                                            </div><!--end card-body-->
                                         </div>
                                     </div>
-                                </div> <!-- end education -->
+                                </div>
+                            </div> <!-- end education -->
 
-                            </div> <!-- Tab panes -->
-                        </div>
+                        </div> <!-- Tab panes -->
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- container-fluid -->
+
+    </div>
+    <!-- container-fluid -->
     </div>
 
     <script>
-        $(document).ready(function(){
-            $('#image').change(function(e){
+        $(document).ready(function() {
+            $('#image').change(function(e) {
                 var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#showImage').attr('src',e.target.result);
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
             })
