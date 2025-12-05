@@ -12,8 +12,7 @@
 
                 <div class="text-end">
                     <ol class="breadcrumb m-0 py-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                        <li class="breadcrumb-item active">Data Tables</li>
+                        <a href="{{ route('add.brand') }}" class="btn btn-secondary">Marke hinzufügen</a>
                     </ol>
                 </div>
             </div>
@@ -42,10 +41,10 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td><img src="{{ asset($item->image) }}" style="width: 70px"></td>
+                                            <td><img src="{{ asset($item->image) }}" style="width: 50px; height: 50px;"></td>
                                             <td>
-                                                <a href="" class="btn-sm btn-primary">Edit</a>
-                                                <a href="" class="btn-sm btn-danger">Löschen</a>
+                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="" class="btn btn-sm btn-danger">Löschen</a>
                                             </td>
                                         </tr>
                                     @endforeach
