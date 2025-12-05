@@ -35,7 +35,7 @@
                 </li>
 
                 <li>
-                    <a href="#brands1" data-bs-toggle="collapse">
+                    <a href="#brands" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
                         <span>Marken</span>
                         <span class="menu-arrow"></span>
@@ -45,8 +45,20 @@
                             <li>
                                 <a href="{{ route('all.brand') }}" class="tp-link">Übersicht</a>
                             </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="#warehouse" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Lager</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="warehouse">
+                        <ul class="nav-second-level">
                             <li>
-                                <a href="auth-register.html" class="tp-link">Register</a>
+                                <a href="{{ route('all.warehouse') }}" class="tp-link">Übersicht</a>
                             </li>
                         </ul>
                     </div>
