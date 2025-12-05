@@ -35,6 +35,10 @@ class BrandController extends Controller
                 'name' => $request->name,
                 'image' => $save_url
             ]);
+        } else {
+            Brand::create([
+                'name' => $request->name,
+            ]);
         }
 
         $notification = array(
@@ -61,7 +65,7 @@ class BrandController extends Controller
             $manager = new ImageManager(new Driver);
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             $img = $manager->read($image);
-            $img->resize(200, 300)->save(public_path('upload/brand/' . $name_gen));
+            $img->resize(100, 90)->save(public_path('upload/brand/' . $name_gen));
             $save_url = 'upload/brand/' . $name_gen;
 
             if (file_exists(public_path($brand->image))) {
@@ -84,5 +88,21 @@ class BrandController extends Controller
         );
 
         return redirect()->route('all.brand')->with($notification);
+    }
+
+    public function DeleteBrand($id)
+    {
+        $item = Brand::find($id);
+        $img = $item->image;
+        unlink($img);
+
+        Brand::find($id)->delete();
+        
+        $notification = array(
+            'message' => 'Marke wurde gelöscht',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
     }
 }
