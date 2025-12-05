@@ -41,9 +41,10 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $item->name }}</td>
-                                            <td><img src="{{ asset($item->image) }}" style="width: 50px; height: 50px;"></td>
+                                            <td><img src="{{ asset($item->image) }}" style="width: 50px; height: 50px;">
+                                            </td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="{{ route('edit.brand', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                 <a href="" class="btn btn-sm btn-danger">Löschen</a>
                                             </td>
                                         </tr>
