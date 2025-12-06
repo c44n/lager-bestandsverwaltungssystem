@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
 
@@ -28,10 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::post('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
-});
 
-Route::middleware('auth')->group(function () {
-    Route::controller(BrandController::class)->group(function(){
+    Route::controller(BrandController::class)->group(function () {
         Route::get('/all/brand', 'AllBrand')->name('all.brand');
         Route::get('/add/brand', 'AddBrand')->name('add.brand');
         Route::post('/store/brand', 'StoreBrand')->name('store.brand');
@@ -39,12 +38,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/brand/{id}', 'EditBrand')->name('edit.brand');
         Route::get('/delete/brand/{id}', 'DeleteBrand')->name('delete.brand');
     });
-});
 
-Route::middleware('auth')->group(function () {
-    Route::controller(WarehouseController::class)->group(function(){
+    Route::controller(WarehouseController::class)->group(function () {
         Route::get('/all/warehouse', 'AllWarehouse')->name('all.warehouse');
         Route::get('/add/warehouse', 'AddWarehouse')->name('add.warehouse');
+        Route::post('/store/warehouse', 'StoreWarehouse')->name('store.warehouse');
+        Route::get('/edit/warehouse/{id}', 'EditWarehouse')->name('edit.warehouse');
+        Route::post('/update/warehouse', 'UpdateWarehouse')->name('update.warehouse');
+        Route::get('/delete/warehouse/{id}', 'DeleteWarehouse')->name('delete.warehouse');
+    });
+
+    Route::controller(SupplierController::class)->group(function () {
+        Route::get('/all/supplier', 'AllSupplier')->name('all.supplier');
+        Route::get('/add/supplier', 'AddSupplier')->name('add.supplier');
         Route::post('/store/warehouse', 'StoreWarehouse')->name('store.warehouse');
         Route::get('/edit/warehouse/{id}', 'EditWarehouse')->name('edit.warehouse');
         Route::post('/update/warehouse', 'UpdateWarehouse')->name('update.warehouse');

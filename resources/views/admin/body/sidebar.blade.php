@@ -64,6 +64,21 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#supplier" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Lieferanten</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="supplier">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.supplier') }}" class="tp-link">Übersicht</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title">Pages</li>
 
                 <li>
