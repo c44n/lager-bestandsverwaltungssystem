@@ -48,8 +48,8 @@
                                             <td>{{ $item->address }}</td>
                                             </td>
                                             <td>
-                                                <a href="{{ route('edit.warehouse', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ route('delete.warehouse', $item->id) }}" class="btn btn-sm btn-danger" id="delete">Löschen</a>
+                                                <a href="{{ route('edit.supplier', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="{{ route('delete.supplier', $item->id) }}" class="btn btn-sm btn-danger" id="delete">Löschen</a>
                                             </td>
                                         </tr>
                                     @endforeach

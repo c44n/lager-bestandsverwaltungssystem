@@ -7,7 +7,7 @@
 
             <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Lieferant hinzufügen</h4>
+                    <h4 class="fs-18 fw-semibold m-0">Lieferant bearbeiten</h4>
                 </div>
 
                 <div class="text-end">
@@ -26,41 +26,47 @@
                         </div><!-- end card header -->
 
                         <div class="card-body">
-                            <form id="myForm" class="row g-3" action="{{ route('store.supplier') }}" method="post"
+                            <form id="myForm" class="row g-3" action="{{ route('update.supplier') }}" method="post"
                                 enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $supplier->id }}">
                                 <div class="form-group">
                                     <div class="col-6">
                                         <label for="validationDefault01" class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ $supplier->name }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-6">
                                         <label for="validationDefault01" class="form-label">Email</label>
-                                        <input type="email" class="form-control" name="email">
+                                        <input type="email" class="form-control" name="email"
+                                            value="{{ $supplier->email }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-6">
                                         <label for="validationDefault01" class="form-label">Telefon</label>
-                                        <input type="number" class="form-control" name="phone">
+                                        <input type="number" class="form-control" name="phone"
+                                            value="{{ $supplier->phone }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-6">
                                         <label for="validationDefault01" class="form-label">Adresse</label>
-                                        <input type="text" class="form-control" name="address">
+                                        <input type="text" class="form-control" name="address"
+                                            value="{{ $supplier->address }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-6">
                                         <label for="validationDefault01" class="form-label">Stadt</label>
-                                        <input type="text" class="form-control" name="city">
+                                        <input type="text" class="form-control" name="city"
+                                            value="{{ $supplier->city }}">
                                     </div>
                                 </div>
 
