@@ -19,35 +19,6 @@
                             Kategorie hinzufügen
                         </button>
                     </div>
-
-                    <!-- Default Modal -->
-                    <div class="modal fade" id="add_product_category_modal" tabindex="-1"
-                        aria-labelledby="standard-modalLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="standard-modalLabel">Produktkategorie erstellen
-                                    </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('store.category') }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <div class="col-12">
-                                                <label for="input_name" class="form-label">Kategorie Name</label>
-                                                <input type="text" class="form-control" name="name" id="name">
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Speichern</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </ol>
             </div>
 
@@ -78,9 +49,10 @@
                                             <td>{{ $item->category_slug }}</td>
                                             </td>
                                             <td>
-                                                <a href="{{ route('edit.customer', $item->id) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ route('delete.customer', $item->id) }}"
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal"
+                                                    id="{{ $item->id }}" onclick="categoryEdit(this.id)"
+                                                    data-bs-target="#edit_product_category">Edit</button>
+                                                <a href="{{ route('delete.category', $item->id) }}"
                                                     class="btn btn-sm btn-danger" id="delete">Löschen</a>
                                             </td>
                                         </tr>
@@ -95,4 +67,76 @@
         </div> <!-- container-fluid -->
 
     </div>
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="add_product_category_modal" tabindex="-1" aria-labelledby="standard-modalLabel"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="standard-modalLabel">Produktkategorie erstellen
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('store.category') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="input_name" class="form-label">Kategorie Name</label>
+                                <input type="text" class="form-control" name="name" id="name">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="edit_product_category" tabindex="-1" aria-labelledby="standard-modalLabel"
+        style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="standard-modalLabel">Produktkategorie erstellen
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('update.category') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <div class="col-12">
+                                <input type="hidden" name="id" id="cat_id">
+                                <label for="input_name" class="form-label">Kategorie Name</label>
+                                <input type="text" class="form-control" name="name" id="cat_name">
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Speichern</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function categoryEdit(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/edit/category/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    //console.log(data);
+                    $('#cat_name').val(data.category_name);
+                    $('#cat_id').val(data.id);
+                }
+            })
+        }
+    </script>
 @endsection
