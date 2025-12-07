@@ -79,6 +79,21 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#customer" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Kunden</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="customer">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.customer') }}" class="tp-link">Übersicht</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title">Pages</li>
 
                 <li>

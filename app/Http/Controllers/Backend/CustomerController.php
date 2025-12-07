@@ -4,32 +4,31 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Supplier;
+use App\Models\Customer;
 
-class SupplierController extends Controller
+class CustomerController extends Controller
 {
-    public function AllSupplier()
-    {
-        $supplier = Supplier::latest()->get();
-        return view('admin.backend.supplier.all_supplier', compact('supplier'));
+    public function AllCustomer(){
+        $customer = Customer::latest()->get();
+        return view('admin.backend.customer.all_customer', compact('customer'));
     }
 
-    public function AddSupplier()
+    public function AddCustomer()
     {
-        return view('admin.backend.supplier.add_supplier');
+        return view('admin.backend.customer.add_customer');
     }
 
-    public function StoreSupplier(Request $request)
+    public function StoreCustomer(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:suppliers,email|max:255',
+            'email' => 'required|email|unique:customers,email|max:255',
             'phone' => 'nullable|string|max:25',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',
         ]);
 
-        Supplier::create([
+        Customer::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
@@ -38,20 +37,20 @@ class SupplierController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Lieferant wurde hinzugefügt',
+            'message' => 'Kunde wurde hinzugefügt',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.supplier')->with($notification);
-    }
-    
-    public function EditSupplier($id)
-    {
-        $supplier = Supplier::find($id);
-        return view('admin.backend.supplier.edit_supplier', compact('supplier'));
+        return redirect()->route('all.customer')->with($notification);
     }
 
-    public function UpdateSupplier(Request $request)
+    public function EditCustomer($id)
+    {
+        $customer = Customer::find($id);
+        return view('admin.backend.customer.edit_customer', compact('customer'));
+    }
+
+    public function UpdateCustomer(Request $request)
     {
         $id = $request->id;
 
@@ -63,7 +62,7 @@ class SupplierController extends Controller
             'city' => 'required|string|max:255',
         ]);
 
-        Supplier::find($id)->update([
+        Customer::find($id)->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'phone' => $validated['phone'],
@@ -72,18 +71,18 @@ class SupplierController extends Controller
         ]);
 
         $notification = array(
-            'message' => 'Lieferant wurde erfolgreich bearbeitet',
+            'message' => 'Kunde wurde erfolgreich bearbeitet',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.supplier')->with($notification);
+        return redirect()->route('all.customer')->with($notification);
     }
 
-    public function DeleteSupplier($id){
-        Supplier::find($id)->delete();
+    public function DeleteCustomer($id){
+        Customer::find($id)->delete();
 
         $notification = array(
-            'message' => 'Lieferant wurde gelöscht',
+            'message' => 'Kunde wurde gelöscht',
             'alert-type' => 'success'
         );
 
