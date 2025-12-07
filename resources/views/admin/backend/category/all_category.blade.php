@@ -10,11 +10,45 @@
                     <h4 class="fs-18 fw-semibold m-0">Produkt Kategorien</h4>
                 </div>
 
-                <div class="text-end">
-                    <ol class="breadcrumb m-0 py-0">
-                        <a href="{{ route('add.customer') }}" class="btn btn-secondary">Kategorie hinzufügen</a>
-                    </ol>
-                </div>
+                <ol class="breadcrumb m-0 py-0">
+
+                    <!-- Default Modals -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#add_product_category_modal">
+                            Kategorie hinzufügen
+                        </button>
+                    </div>
+
+                    <!-- Default Modal -->
+                    <div class="modal fade" id="add_product_category_modal" tabindex="-1"
+                        aria-labelledby="standard-modalLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="standard-modalLabel">Produktkategorie erstellen
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('store.category') }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <div class="col-12">
+                                                <label for="input_name" class="form-label">Kategorie Name</label>
+                                                <input type="text" class="form-control" name="name" id="name">
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Speichern</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </ol>
             </div>
 
             <!-- Datatables  -->
@@ -44,8 +78,10 @@
                                             <td>{{ $item->category_slug }}</td>
                                             </td>
                                             <td>
-                                                <a href="{{ route('edit.customer', $item->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ route('delete.customer', $item->id) }}" class="btn btn-sm btn-danger" id="delete">Löschen</a>
+                                                <a href="{{ route('edit.customer', $item->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="{{ route('delete.customer', $item->id) }}"
+                                                    class="btn btn-sm btn-danger" id="delete">Löschen</a>
                                             </td>
                                         </tr>
                                     @endforeach
