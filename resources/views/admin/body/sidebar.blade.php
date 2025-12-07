@@ -80,6 +80,21 @@
                 </li>
 
                 <li>
+                    <a href="#products" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Produkte</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="products">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.category') }}" class="tp-link">Kategorien Übersicht</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
                     <a href="#customer" data-bs-toggle="collapse">
                         <i data-feather="users"></i>
                         <span>Kunden</span>

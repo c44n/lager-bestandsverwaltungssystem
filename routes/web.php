@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\WarehouseController;
 use App\Http\Controllers\Backend\CustomerController;
+use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -65,5 +66,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/customer/{id}', 'EditCustomer')->name('edit.customer');
         Route::post('/update/customer', 'UpdateCustomer')->name('update.customer');
         Route::get('/delete/customer/{id}', 'DeleteCustomer')->name('delete.customer');
+    });
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/all/category', 'AllCategory')->name('all.category');
     });
 });
