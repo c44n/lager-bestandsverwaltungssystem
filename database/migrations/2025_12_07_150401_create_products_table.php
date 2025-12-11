@@ -29,11 +29,11 @@ return new class extends Migration
             $table->string('active')->default('1');
             $table->timestamps();
 
-            /// Foreign Key Constranints
-            $table->foreign('category_id')->references('id')->on('product_categories')->onDelete('cascade');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
-            $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('cascade');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
+            /// Foreign Key Constraints
+            $table->foreignId('category_id')->constrained('product_categories')->cascadeOnDelete();
+            $table->foreignId('warehouse_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('brand_id')->constrained()->nullOnDelete();
+            $table->foreignId('supplier_id')->constrained()->nullOnDelete();
         });
     }
 

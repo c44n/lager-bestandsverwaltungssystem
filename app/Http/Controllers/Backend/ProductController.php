@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -62,5 +63,13 @@ class ProductController extends Controller
         );
 
         return redirect()->back()->with($notification);
+    }
+
+    /// Product Methods
+
+
+    public function AllProduct(){
+        $products = Product::orderBy('id', 'desc')->get();
+        return view('admin.backend.product.product_list', compact('products'));
     }
 }
