@@ -6,6 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\Brand;
+use App\Models\ProductImage;
+use App\Models\Warehouse;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductController extends Controller
 {
@@ -68,8 +74,72 @@ class ProductController extends Controller
     /// Product Methods
 
 
-    public function AllProduct(){
+    public function AllProduct()
+    {
         $products = Product::orderBy('id', 'desc')->get();
         return view('admin.backend.product.product_list', compact('products'));
+    }
+
+    public function AddProduct()
+    {
+        $categories = ProductCategory::all();
+        $brands     = Brand::all();
+        $suppliers  = Supplier::all();
+        $warehouses = Warehouse::all();
+
+        return view('admin.backend.product.add_product', compact('categories', 'brands', 'suppliers', 'warehouses'));
+    }
+
+    public function StoreProduct(Request $request)
+    {
+        $product = Product::create([
+            'name' => $request->name,
+            'code' => $request->code,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brand_id,
+            'warehouse_id' => $request->warehouse_id,
+            'supplier_id' => $request->supplier_id,
+            'price' => $request->price,
+            'stock_alert' => $request->stock_alert,
+            'note' => $request->note,
+            'product_qty' => $request->product_qty,
+            'status' => $request->status,
+            'created_at' => now()
+        ]);
+
+        $product_id = $product->id;
+
+        /// Multiple Image Upload
+        if ($request->hasFile('image')) {
+            foreach ($request->file('image') as $image) {
+                $manager = new ImageManager(new Driver);
+                $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                $imgs = $manager->read($image);
+                $imgs->resize(150, 150)->save(public_path('upload/product_img/' . $name_gen));
+                $save_url = 'upload/product_img/' . $name_gen;
+
+                ProductImage::create([
+                    'product_id' => $product_id,
+                    'image' => $save_url,
+                ]);
+            }
+        }
+
+        $notification = array(
+            'message' => 'Produkt wurde gespeichert',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.product')->with($notification);
+    }
+
+    public function EditProduct($id){
+        $editData = Product::find($id);
+        $categories = ProductCategory::all();
+        $brands     = Brand::all();
+        $suppliers  = Supplier::all();
+        $warehouses = Warehouse::all();
+        $multiImg = ProductImage::where('product_id', $id)->get();
+
+        return view('admin.backend.product.edit_product', compact('categories', 'brands', 'suppliers', 'warehouses', 'editData', 'multiImg'));
     }
 }

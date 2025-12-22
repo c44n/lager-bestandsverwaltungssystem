@@ -78,5 +78,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ProductController::class)->group(function(){
         Route::get('/all/product', 'AllProduct')->name('all.product');
+        Route::get('/add/product', 'AddProduct')->name('add.product');
+        Route::post('/store/product', 'StoreProduct')->name('store.product');
+        Route::get('/edit/product/{id}', 'EditProduct')->name('edit.product');
     });
 });

@@ -12,7 +12,7 @@
 
                 <div class="text-end">
                     <ol class="breadcrumb m-0 py-0">
-                        <a href="{{ route('add.customer') }}" class="btn btn-secondary">Produkt hinzufügen</a>
+                        <a href="{{ route('add.product') }}" class="btn btn-secondary">Produkt hinzufügen</a>
                     </ol>
                 </div>
             </div>
@@ -36,7 +36,6 @@
                                         <th>Lager</th>
                                         <th>Preis</th>
                                         <th>Stückzahl</th>
-                                        <th>Im Sortiment seit</th>
                                         <th>Aktion</th>
                                     </tr>
                                 </thead>
@@ -47,12 +46,12 @@
                                             <td>
                                                 @php
                                                     $primaryImage =
-                                                        $item->image->first()->image ?? '/upload/no_image.jpg';
+                                                        $item->images->first()->image ?? '/upload/no_image.jpg';
                                                 @endphp
                                                 <img src="{{ asset($primaryImage) }}" alt="img" width="40px">
                                             </td>
                                             <td>{{ $item->name }}</td>
-                                            <td>{{ $item->warehouse_id }}</td>
+                                            <td>{{ $item['warehouse']->name }}</td>
                                             <td>{{ $item->price }}</td>
                                             <td>
                                                 @if ($item->product_qty <= 3)
@@ -64,13 +63,19 @@
                                                     </h4>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->address }}</td>
-                                            </td>
                                             <td>
-                                                <a href="{{ route('edit.customer', $item->id) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <a href="{{ route('delete.customer', $item->id) }}"
-                                                    class="btn btn-sm btn-danger" id="delete">Löschen</a>
+                                                <a title="Details" href="{{ route('edit.customer', $item->id) }}"
+                                                    class="btn btn-sm btn-info">
+                                                    <span class="mdi mdi-eye-outline mdi-18px"></span>
+                                                </a>
+                                                <a title="Edit" href="{{ route('edit.product', $item->id) }}"
+                                                    class="btn btn-sm btn-primary">
+                                                    <span class="mdi mdi-pencil-outline mdi-18px"></span>
+                                                </a>
+                                                <a title="Delete" href="{{ route('delete.customer', $item->id) }}"
+                                                    class="btn btn-sm btn-danger" id="delete">
+                                                    <span class="mdi mdi-trash-can-outline mdi-18px"></span>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
