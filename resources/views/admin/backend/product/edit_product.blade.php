@@ -16,8 +16,9 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('store.product') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('update.product') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $editData->id }}">
                             <div class="row">
                                 <div class="col-xl-8">
                                     <div class="card">
@@ -41,7 +42,9 @@
                                                         class="form-control form-select">
                                                         <option value="">auswählen</option>
                                                         @foreach ($categories as $item)
-                                                            <option {{ ($editData->category_id == $item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->category_name }}
+                                                            <option
+                                                                {{ $editData->category_id == $item->id ? 'selected' : '' }}
+                                                                value="{{ $item->id }}">{{ $item->category_name }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -55,7 +58,8 @@
                                                     <select name="brand_id" id="brand_id" class="form-control form-select">
                                                         <option value="">auswählen</option>
                                                         @foreach ($brands as $item)
-                                                            <option {{ ($editData->brand_id == $item->id) ? 'selected' : '' }} value="{{ $item->id }}">{{ $item->name }}</option>
+                                                            <option {{ $editData->brand_id == $item->id ? 'selected' : '' }}
+                                                                value="{{ $item->id }}">{{ $item->name }}</option>
                                                         @endforeach
                                                     </select>
 
@@ -65,16 +69,13 @@
                                                 <label class="form-label">Preis: </label>
                                                 <input type="text" name="price" class="form-control"
                                                     value="{{ $editData->price }}">
-
                                             </div>
-
 
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label">Stock Alert: <span
                                                         class="text-danger">*</span></label>
                                                 <input type="number" name="stock_alert" class="form-control"
                                                     value="{{ $editData->stock_alert }}" min="0" required>
-
                                             </div>
 
                                             <div class="col-md-12">
@@ -92,7 +93,23 @@
                                                 id="multiImg" class="upload-input-file form-control">
                                         </div>
 
-                                        <div class="row" id="preview_img"></div>
+                                        <div class="row" id="preview_img">
+                                            @if ($editData?->images?->count() > 0)
+                                                @foreach ($editData->images as $img)
+                                                    <div class="col-md-3 mb-2">
+                                                        <img src="{{ asset($img->image) }}" alt="Produktbild"
+                                                            class="img-thumbnail">
+                                                        <div class="form-check mt-1">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                name="remove_image[]" value="{{ $img->id }}"
+                                                                id="remove_image_{{ $img->id }}">
+                                                            <label class="form-check-label"
+                                                                for="remove_image_{{ $img->id }}">Löschen</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </div>
                                     <div>
                                         <div class="col-md-12 mb-3">
@@ -106,7 +123,8 @@
                                                     class="form-control form-select">
                                                     <option value="">auswählen</option>
                                                     @foreach ($warehouses as $item)
-                                                        <option @selected($editData->warehouse_id == $item->id) value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        <option @selected($editData->warehouse_id == $item->id) value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
 
@@ -120,7 +138,8 @@
                                                     class="form-control form-select">
                                                     <option value="">auswählen</option>
                                                     @foreach ($suppliers as $item)
-                                                        <option @selected($editData->supplier_id == $item->id)  value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        <option @selected($editData->supplier_id == $item->id) value="{{ $item->id }}">
+                                                            {{ $item->name }}</option>
                                                     @endforeach
                                                 </select>
 
@@ -140,8 +159,10 @@
                                                         class="text-danger">*</span></label>
                                                 <select name="status" id="status" class="form-control form-select">
                                                     <option selected="">auswählen</option>
-                                                    <option value="Received" @selected(($editData->status ?? null) == 'Received') >Verfügbar</option>
-                                                    <option value="Pending" @selected(($editData->status ?? null) == 'Pending')>Nicht verfügbar</option>
+                                                    <option value="Received" @selected(($editData->status ?? null) == 'Received')>Verfügbar
+                                                    </option>
+                                                    <option value="Pending" @selected(($editData->status ?? null) == 'Pending')>Nicht verfügbar
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
