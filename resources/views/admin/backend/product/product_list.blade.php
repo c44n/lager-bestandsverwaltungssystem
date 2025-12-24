@@ -72,7 +72,7 @@
                                                     class="btn btn-sm btn-primary">
                                                     <span class="mdi mdi-pencil-outline mdi-18px"></span>
                                                 </a>
-                                                <a title="Delete" href="{{ route('delete.customer', $item->id) }}"
+                                                <a title="Delete" href="{{ route('delete.product', $item->id) }}"
                                                     class="btn btn-sm btn-danger" id="delete">
                                                     <span class="mdi mdi-trash-can-outline mdi-18px"></span>
                                                 </a>
