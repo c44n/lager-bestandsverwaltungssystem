@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SupplierController;
 use App\Http\Controllers\Backend\WarehouseController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\PurchaseController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -74,6 +75,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
         Route::post('/update/category', 'UpdateCategory')->name('update.category');
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
+    });
+
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchases', 'index')->name('purchases.index');
+        Route::get('/purchases/create', 'create')->name('purchases.create');
     });
 
     Route::controller(ProductController::class)->group(function () {

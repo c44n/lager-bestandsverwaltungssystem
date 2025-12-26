@@ -124,6 +124,21 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#purchase" data-bs-toggle="collapse">
+                        <i data-feather="users"></i>
+                        <span>Bestellungen</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="purchase">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('purchases.index') }}" class="tp-link">Übersicht</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 <li class="menu-title">Pages</li>
 
                 <li>
