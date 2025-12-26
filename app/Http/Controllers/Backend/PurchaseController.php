@@ -23,11 +23,10 @@ class PurchaseController extends Controller
     }
 
     public function create(): View
-{
-    // Hier holst du oft Daten für Dropdowns (z.B. Lieferanten)
-    $suppliers = Supplier::all();
-    $warehouses = Warehouse::all();
+    {
+        $suppliers = Supplier::all();
+        $warehouses = Warehouse::all();
 
-    return view('admin.backend.purchases.create', compact('suppliers', 'warehouses'));
-}
+        return view('admin.backend.purchases.create', compact('suppliers', 'warehouses'));
+    }
 }
