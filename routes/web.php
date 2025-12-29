@@ -77,11 +77,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
     });
 
-    Route::controller(PurchaseController::class)->group(function () {
-        Route::get('/purchases', 'index')->name('purchases.index');
-        Route::get('/purchases/create', 'create')->name('purchases.create');
-    });
-
     Route::controller(ProductController::class)->group(function () {
         Route::get('/all/product', 'AllProduct')->name('all.product');
         Route::get('/add/product', 'AddProduct')->name('add.product');
@@ -90,5 +85,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/product', 'UpdateProduct')->name('update.product');
         Route::get('/delete/product/{id}', 'DeleteProduct')->name('delete.product');
         Route::get('/details/product/{id}', 'DetailsProduct')->name('details.product');
+    });
+
+    Route::controller(PurchaseController::class)->group(function () {
+        Route::get('/purchases', 'index')->name('purchases.index');
+        Route::get('/purchases/create', 'create')->name('purchases.create');
+        Route::get('/purchases/search-products', 'searchProducts')->name('purchases.search-products');
     });
 });

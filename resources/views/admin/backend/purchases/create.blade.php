@@ -9,7 +9,6 @@
                             href="{{ route('purchases.index') }}">Zurück</a></div>
                 </div>
 
-
                 <div class="card">
                     <div class="card-body">
                         <form action=" " method="post" enctype="multipart/form-data">
@@ -201,11 +200,14 @@
                                     <a class="btn btn-secondary" href="{{ route('purchases.index') }}">Abbrechen</a>
                                 </div>
                             </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
+    <script>
+        var productSearchUrl = "{{ route('purchases.search-products') }}";
+    </script>
 @endsection
